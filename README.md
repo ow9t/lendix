@@ -23,14 +23,13 @@ remember in which box I put them or whether I have lent them to any of my friend
 the idea for this app was born. I wanted an app, which assists me in keeping track of
 the items I lent to my friends, so I would not have to remember it myself.
 
-## Localization
+### Localization
 
-This project generates localized messages based on arb files found in
-the `lib/src/localization` directory.
+This project generates localized messages based on arb files found in the [localization](lib/src/localization) directory.
 
-To support additional languages, please visit the tutorial on
-[Internationalizing Flutter
-apps](https://flutter.dev/docs/development/accessibility-and-localization/internationalization)
+This app currently supports German and English locales.
+
+To support additional languages, please visit the tutorial on [Internationalizing Flutter apps](https://flutter.dev/docs/development/accessibility-and-localization/internationalization)
 
 ## License
 

@@ -43,6 +43,7 @@ class MyApp extends StatelessWidget {
           ],
           supportedLocales: const [
             Locale('en', ''), // English, no country code
+            Locale('de', ''), // German, no country code
           ],
 
           // Use AppLocalizations to configure the correct application title
@@ -56,8 +57,34 @@ class MyApp extends StatelessWidget {
           // Define a light and dark color theme. Then, read the user's
           // preferred ThemeMode (light, dark, or system default) from the
           // SettingsController to display the correct theme.
-          theme: ThemeData(),
-          darkTheme: ThemeData.dark(),
+          theme: ThemeData(
+            appBarTheme: const AppBarTheme(backgroundColor: Colors.purple),
+            colorScheme: ColorScheme.light(
+              primary: Colors.purple,
+              primaryVariant: Colors.purple[600]!,
+              secondary: Colors.green,
+            ),
+            floatingActionButtonTheme: const FloatingActionButtonThemeData(
+              foregroundColor: Colors.white,
+            ),
+            inputDecorationTheme: const InputDecorationTheme(
+              border: OutlineInputBorder(),
+            ),
+          ),
+          darkTheme: ThemeData(
+            appBarTheme: const AppBarTheme(backgroundColor: Colors.purple),
+            colorScheme: ColorScheme.dark(
+              primary: Colors.purple,
+              primaryVariant: Colors.purple[600]!,
+              secondary: Colors.green,
+            ),
+            floatingActionButtonTheme: const FloatingActionButtonThemeData(
+              foregroundColor: Colors.white,
+            ),
+            inputDecorationTheme: const InputDecorationTheme(
+              border: OutlineInputBorder(),
+            ),
+          ),
           themeMode: settingsController.themeMode,
 
           // Define a function to handle named routes in order to support

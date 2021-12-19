@@ -1,0 +1,11 @@
+{
+  "appTitle": "Lendix",
+  "@appTitle": {
+    "description": "Der Titel der Applikation"
+  },
+  "settingsAppearanceLabel": "Aussehen",
+  "settingsTitle": "Einstellungen",
+  "themeDark": "Dunkles Thema",
+  "themeLight": "Helles Thema",
+  "themeSystem": "Systemthema"
+}
