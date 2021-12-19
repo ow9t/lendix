@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.owoid.lendix">
    <application
-        android:label="lendix"
+        android:label="Lendix"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

@@ -1,5 +1,5 @@
 name: lendix
-description: A new Flutter project.
+description: A Flutter app to track items you borrowed from or lent to your friends.
 
 # Prevent accidental publishing to pub.dev.
 publish_to: 'none'
