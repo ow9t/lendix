@@ -23,6 +23,21 @@ remember in which box I put them or whether I have lent them to any of my friend
 the idea for this app was born. I wanted an app, which assists me in keeping track of
 the items I lent to my friends, so I would not have to remember it myself.
 
+### Database
+
+This app uses [Drift](https://drift.simonbinder.eu/) (formerly known as Moor), a
+reactive persistence library for Flutter apps, which was inspired by Room for native
+Android apps.
+
+The database schema consists of four entities, which are defined in [tables.dart](lib/src/database/tables.dart):
+Category, Item, Lending, Person.
+
+A `Lending` links an `Item` to a `Person` and has a **date**, a flag, whether the
+`Item` is **lent** from or **borrowed** to that `Person`, as well as a **return date**,
+for when the `Item` is returned to or by that `Person`. The dates are stored in the
+database as ISO 8601 strings. An `Item` has a **name** and may have a `Category`.
+Both, a `Category` and a `Person` only have a **name**.
+
 ### Localization
 
 This project generates localized messages based on arb files found in the [localization](lib/src/localization) directory.
