@@ -9,6 +9,7 @@ class EntitySearchDelegate<T> extends SearchDelegate<T?> {
     required this.buildListTile,
     required this.emptyLabel,
     TextInputType keyboardType = TextInputType.name,
+    this.onCreate,
     String? searchFieldLabel,
     TextInputAction textInputAction = TextInputAction.search,
   }) : super(
@@ -19,6 +20,7 @@ class EntitySearchDelegate<T> extends SearchDelegate<T?> {
 
   final Widget Function(T value, VoidCallback? onTap) buildListTile;
   final String emptyLabel;
+  final void Function(String)? onCreate;
 
   @override
   List<Widget>? buildActions(BuildContext context) {
@@ -27,6 +29,14 @@ class EntitySearchDelegate<T> extends SearchDelegate<T?> {
         onPressed: () => query = '',
         icon: const Icon(Icons.clear),
       ),
+      if (onCreate != null)
+        IconButton(
+          onPressed: () {
+            close(context, null);
+            onCreate!(query);
+          },
+          icon: const Icon(Icons.create),
+        ),
     ];
   }
 
@@ -57,14 +67,15 @@ class EntitySearchDelegate<T> extends SearchDelegate<T?> {
           child: AsciimojiShrug(label: emptyLabel),
         );
       }
-      return ListView(
-        children: [
-          for (final value in state)
-            buildListTile(
-              value,
-              () => close(context, value),
-            ),
-        ],
+      return ListView.builder(
+        itemCount: state.length,
+        itemBuilder: (context, index) {
+          final value = state.elementAt(index);
+          return buildListTile(
+            value,
+            () => close(context, value),
+          );
+        },
       );
     });
   }

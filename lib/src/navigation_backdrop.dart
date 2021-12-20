@@ -1,16 +1,22 @@
 import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'categories/categories_list_page.dart';
 import 'categories/create_edit_category_page.dart';
 import 'database/database.dart';
+import 'items/create_edit_item_page.dart';
+import 'items/items_filter_back_layer.dart';
+import 'items/items_filter_cubit.dart';
+import 'items/items_list_page.dart';
 import 'people/create_edit_person_page.dart';
 import 'people/people_list_page.dart';
 import 'settings/settings_view.dart';
 import 'widgets/entity_search/entity_search_delegate.dart';
+import 'widgets/notification_icon.dart';
 
-enum BackdropRoute { categories, people, settings }
+enum BackdropRoute { categories, items, people, settings }
 
 class NavigationBackdrop extends StatefulWidget {
   const NavigationBackdrop({Key? key}) : super(key: key);
@@ -32,6 +38,8 @@ class _NavigationBackdropState extends State<NavigationBackdrop> {
     switch (route) {
       case BackdropRoute.categories:
         return Icon(Icons.category_outlined, color: color);
+      case BackdropRoute.items:
+        return Icon(Icons.blender, color: color);
       case BackdropRoute.people:
         return Icon(Icons.person, color: color);
       case BackdropRoute.settings:
@@ -44,6 +52,8 @@ class _NavigationBackdropState extends State<NavigationBackdrop> {
     switch (route) {
       case BackdropRoute.categories:
         return localizations.categoriesTitle;
+      case BackdropRoute.items:
+        return localizations.itemsTitle;
       case BackdropRoute.people:
         return localizations.peopleTitle;
       case BackdropRoute.settings:
@@ -82,6 +92,51 @@ class _NavigationBackdropState extends State<NavigationBackdrop> {
             icon: const Icon(Icons.search),
           ),
         ];
+      case BackdropRoute.items:
+        return [
+          IconButton(
+            onPressed: () async {
+              final result = await showSearch(
+                context: context,
+                delegate: EntitySearchDelegate<ItemWithCategory>(
+                  buildListTile: (value, onTap) => ListTile(
+                    onTap: onTap,
+                    title: Text(value.item.name),
+                    subtitle: Text(
+                        value.category?.name ?? localizations.categoryNone),
+                  ),
+                  emptyLabel: localizations.itemsEmptyList,
+                  searchFieldLabel: localizations.searchItem,
+                ),
+              );
+              if (result != null) {
+                Navigator.restorablePushNamed(
+                  context,
+                  CreateEditItemPage.routeName,
+                  arguments: result.item.id,
+                );
+              }
+            },
+            icon: const Icon(Icons.search),
+          ),
+          IconButton(
+            onPressed: () {
+              setState(() {
+                showExtraBackLayer = true;
+              });
+              _scaffoldKey.currentState!.fling();
+            },
+            icon: BlocBuilder<ItemsFilterCubit, List<Category>>(
+              builder: (context, state) {
+                return NotificationIcon(
+                  Icons.tune,
+                  notificationColor: Theme.of(context).colorScheme.secondary,
+                  showNotification: state.isNotEmpty,
+                );
+              },
+            ),
+          ),
+        ];
       case BackdropRoute.people:
         return [
           IconButton(
@@ -115,6 +170,13 @@ class _NavigationBackdropState extends State<NavigationBackdrop> {
 
   Widget buildBackLayer() {
     final currentRoute = BackdropRoute.values[currentIndex];
+    if (showExtraBackLayer) {
+      switch (currentRoute) {
+        case BackdropRoute.items:
+          return const ItemsFilterBackLayer();
+        default:
+      }
+    }
     return BackdropNavigationBackLayer(
       items: [
         for (final route in BackdropRoute.values)
@@ -148,6 +210,9 @@ class _NavigationBackdropState extends State<NavigationBackdrop> {
       case BackdropRoute.categories:
         routeName = CreateEditCategoryPage.routeName;
         break;
+      case BackdropRoute.items:
+        routeName = CreateEditItemPage.routeName;
+        break;
       case BackdropRoute.people:
         routeName = CreateEditPersonPage.routeName;
         break;
@@ -168,6 +233,8 @@ class _NavigationBackdropState extends State<NavigationBackdrop> {
   Widget buildFrontLayer() {
     final currentRoute = BackdropRoute.values[currentIndex];
     switch (currentRoute) {
+      case BackdropRoute.items:
+        return const ItemsListPage();
       case BackdropRoute.people:
         return const PeopleListPage();
       case BackdropRoute.categories:

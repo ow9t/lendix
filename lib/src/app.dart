@@ -6,6 +6,8 @@ import 'package:lendix/constants.dart';
 
 import 'categories/create_edit_category_page.dart';
 import 'database/database.dart';
+import 'items/create_edit_item_page.dart';
+import 'items/items_filter_cubit.dart';
 import 'navigation_backdrop.dart';
 import 'people/create_edit_person_page.dart';
 import 'settings/settings_controller.dart';
@@ -37,6 +39,14 @@ class MyApp extends StatelessWidget {
                   .read<MyDatabase>()
                   .categoriesDao
                   .watchCategories(nameFilter: query),
+            ),
+          ),
+          BlocProvider(
+            create: (context) => EntitySearchCubit<ItemWithCategory>(
+              (query) => context
+                  .read<MyDatabase>()
+                  .itemsDao
+                  .watchItemsWithCategory(nameFilter: query),
             ),
           ),
           BlocProvider(
@@ -132,6 +142,14 @@ class MyApp extends StatelessWidget {
                         return CreateEditCategoryPage(categoryId: categoryId);
                       },
                     );
+                  case CreateEditItemPage.routeName:
+                    return MaterialPageRoute<void>(
+                      settings: routeSettings,
+                      builder: (BuildContext context) {
+                        final itemId = routeSettings.arguments as int?;
+                        return CreateEditItemPage(itemId: itemId);
+                      },
+                    );
                   case CreateEditPersonPage.routeName:
                     return MaterialPageRoute<void>(
                       settings: routeSettings,
@@ -144,7 +162,10 @@ class MyApp extends StatelessWidget {
                     return MaterialPageRoute<void>(
                       settings: routeSettings,
                       builder: (context) {
-                        return const NavigationBackdrop();
+                        return BlocProvider(
+                          create: (context) => ItemsFilterCubit(),
+                          child: const NavigationBackdrop(),
+                        );
                       },
                     );
                 }

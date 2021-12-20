@@ -7,11 +7,16 @@ import '../widgets/name_form_field.dart';
 import 'category_cubit.dart';
 
 class CreateEditCategoryPage extends StatefulWidget {
-  const CreateEditCategoryPage({Key? key, this.categoryId}) : super(key: key);
+  const CreateEditCategoryPage({
+    Key? key,
+    this.categoryId,
+    this.initialName,
+  }) : super(key: key);
 
   static const routeName = '/category';
 
   final int? categoryId;
+  final String? initialName;
 
   @override
   State<CreateEditCategoryPage> createState() => _CreateEditCategoryPageState();
@@ -33,7 +38,11 @@ class _CreateEditCategoryPageState extends State<CreateEditCategoryPage> {
       final localizations = AppLocalizations.of(context)!;
       final result = await _cubit!.submit();
       if (result == null) {
-        Navigator.pop(context);
+        final currentState = _cubit!.state;
+        Navigator.pop(context, {
+          'id': currentState.id.value,
+          'name': currentState.name.value,
+        });
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           behavior: SnackBarBehavior.floating,
           content: Text(
@@ -121,7 +130,7 @@ class _CreateEditCategoryPageState extends State<CreateEditCategoryPage> {
                     child: NameFormField(
                       autofocus: true,
                       focusNode: _focusNode,
-                      initialValue: state.name.value,
+                      initialValue: widget.initialName ?? state.name.value,
                       maxLength: categoryNameMaxLength,
                       onFieldSubmitted: _handleSubmitted,
                       onSaved: (value) {
