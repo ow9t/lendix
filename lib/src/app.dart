@@ -7,6 +7,7 @@ import 'package:lendix/constants.dart';
 import 'categories/create_edit_category_page.dart';
 import 'database/database.dart';
 import 'navigation_backdrop.dart';
+import 'people/create_edit_person_page.dart';
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
 import 'widgets/entity_search/entity_search_cubit.dart';
@@ -36,6 +37,14 @@ class MyApp extends StatelessWidget {
                   .read<MyDatabase>()
                   .categoriesDao
                   .watchCategories(nameFilter: query),
+            ),
+          ),
+          BlocProvider(
+            create: (context) => EntitySearchCubit<Person>(
+              (query) => context
+                  .read<MyDatabase>()
+                  .peopleDao
+                  .watchPeople(nameFilter: query),
             ),
           ),
         ],
@@ -121,6 +130,14 @@ class MyApp extends StatelessWidget {
                       builder: (BuildContext context) {
                         final categoryId = routeSettings.arguments as int?;
                         return CreateEditCategoryPage(categoryId: categoryId);
+                      },
+                    );
+                  case CreateEditPersonPage.routeName:
+                    return MaterialPageRoute<void>(
+                      settings: routeSettings,
+                      builder: (BuildContext context) {
+                        final personId = routeSettings.arguments as int?;
+                        return CreateEditPersonPage(personId: personId);
                       },
                     );
                   default:

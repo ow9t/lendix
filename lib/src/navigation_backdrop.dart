@@ -5,10 +5,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'categories/categories_list_page.dart';
 import 'categories/create_edit_category_page.dart';
 import 'database/database.dart';
+import 'people/create_edit_person_page.dart';
+import 'people/people_list_page.dart';
 import 'settings/settings_view.dart';
 import 'widgets/entity_search/entity_search_delegate.dart';
 
-enum BackdropRoute { categories, settings }
+enum BackdropRoute { categories, people, settings }
 
 class NavigationBackdrop extends StatefulWidget {
   const NavigationBackdrop({Key? key}) : super(key: key);
@@ -30,6 +32,8 @@ class _NavigationBackdropState extends State<NavigationBackdrop> {
     switch (route) {
       case BackdropRoute.categories:
         return Icon(Icons.category_outlined, color: color);
+      case BackdropRoute.people:
+        return Icon(Icons.person, color: color);
       case BackdropRoute.settings:
         return Icon(Icons.settings, color: color);
     }
@@ -40,6 +44,8 @@ class _NavigationBackdropState extends State<NavigationBackdrop> {
     switch (route) {
       case BackdropRoute.categories:
         return localizations.categoriesTitle;
+      case BackdropRoute.people:
+        return localizations.peopleTitle;
       case BackdropRoute.settings:
         return localizations.settingsTitle;
     }
@@ -69,6 +75,32 @@ class _NavigationBackdropState extends State<NavigationBackdrop> {
                 Navigator.restorablePushNamed(
                   context,
                   CreateEditCategoryPage.routeName,
+                  arguments: result.id,
+                );
+              }
+            },
+            icon: const Icon(Icons.search),
+          ),
+        ];
+      case BackdropRoute.people:
+        return [
+          IconButton(
+            onPressed: () async {
+              final result = await showSearch(
+                context: context,
+                delegate: EntitySearchDelegate<Person>(
+                  buildListTile: (value, onTap) => ListTile(
+                    onTap: onTap,
+                    title: Text(value.name),
+                  ),
+                  emptyLabel: localizations.peopleEmptyList,
+                  searchFieldLabel: localizations.searchPerson,
+                ),
+              );
+              if (result != null) {
+                Navigator.restorablePushNamed(
+                  context,
+                  CreateEditPersonPage.routeName,
                   arguments: result.id,
                 );
               }
@@ -116,7 +148,9 @@ class _NavigationBackdropState extends State<NavigationBackdrop> {
       case BackdropRoute.categories:
         routeName = CreateEditCategoryPage.routeName;
         break;
-
+      case BackdropRoute.people:
+        routeName = CreateEditPersonPage.routeName;
+        break;
       default:
         return null;
     }
@@ -134,6 +168,8 @@ class _NavigationBackdropState extends State<NavigationBackdrop> {
   Widget buildFrontLayer() {
     final currentRoute = BackdropRoute.values[currentIndex];
     switch (currentRoute) {
+      case BackdropRoute.people:
+        return const PeopleListPage();
       case BackdropRoute.categories:
       default:
         return const CategoriesListPage();
