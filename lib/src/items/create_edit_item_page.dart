@@ -9,11 +9,16 @@ import '../widgets/name_form_field.dart';
 import 'item_cubit.dart';
 
 class CreateEditItemPage extends StatefulWidget {
-  const CreateEditItemPage({Key? key, this.itemId}) : super(key: key);
+  const CreateEditItemPage({
+    Key? key,
+    this.itemId,
+    this.initialName,
+  }) : super(key: key);
 
   static const routeName = '/item';
 
   final int? itemId;
+  final String? initialName;
 
   @override
   State<CreateEditItemPage> createState() => _CreateEditItemPageState();
@@ -43,7 +48,15 @@ class _CreateEditItemPageState extends State<CreateEditItemPage>
       final result = await _cubit!.submit();
       final scaffoldMessenger = ScaffoldMessenger.of(context);
       if (result == null) {
-        Navigator.pop(context);
+        final currentState = _cubit!.state;
+        Navigator.pop(context, {
+          'itemId': currentState.id.value,
+          'itemName': currentState.name.value,
+          'categoryId': currentState.categoryId.value,
+          'categoryName': _categoryController.text.isEmpty
+              ? null
+              : _categoryController.text,
+        });
         scaffoldMessenger.showSnackBar(SnackBar(
           behavior: SnackBarBehavior.floating,
           content: Text(
@@ -192,7 +205,7 @@ class _CreateEditItemPageState extends State<CreateEditItemPage>
                         child: NameFormField(
                           autofocus: true,
                           focusNode: _nameFocusNode,
-                          initialValue: state.name.value,
+                          initialValue: widget.initialName ?? state.name.value,
                           onSaved: (value) {
                             _cubit!.saveName(value ?? '');
                             setState(() {

@@ -7,11 +7,16 @@ import '../widgets/name_form_field.dart';
 import 'person_cubit.dart';
 
 class CreateEditPersonPage extends StatefulWidget {
-  const CreateEditPersonPage({Key? key, this.personId}) : super(key: key);
+  const CreateEditPersonPage({
+    Key? key,
+    this.personId,
+    this.initialName,
+  }) : super(key: key);
 
   static const routeName = '/person';
 
   final int? personId;
+  final String? initialName;
 
   @override
   State<CreateEditPersonPage> createState() => _CreateEditPersonPageState();
@@ -60,7 +65,11 @@ class _CreateEditPersonPageState extends State<CreateEditPersonPage> {
       final localizations = AppLocalizations.of(context)!;
       final result = await _cubit!.submit();
       if (result == null) {
-        Navigator.pop(context);
+        final currentState = _cubit!.state;
+        Navigator.pop(context, {
+          'id': currentState.id.value,
+          'name': currentState.name.value,
+        });
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           behavior: SnackBarBehavior.floating,
           content: Text(
@@ -120,7 +129,7 @@ class _CreateEditPersonPageState extends State<CreateEditPersonPage> {
                     child: NameFormField(
                       autofocus: true,
                       focusNode: _focusNode,
-                      initialValue: state.name.value,
+                      initialValue: widget.initialName ?? state.name.value,
                       maxLength: personNameMaxLength,
                       onFieldSubmitted: _handleSubmitted,
                       onSaved: (value) {

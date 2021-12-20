@@ -1,4 +1,5 @@
 {
+  "all": "all",
   "appTitle": "Lendix",
   "@appTitle": {
     "description": "The title of the application"
@@ -14,10 +15,18 @@
   "delete": "delete",
   "errorCategoryExists": "Category already exists.",
   "errorItemWithCategoryExists": "Item with this category already exists.",
+  "errorLendingWithDataExistsLong": "Lending with this combination of item (with category), person, and date already exists.",
+  "errorLendingWithDataExistsShort": "Combination of item, person, and date already exists.",
   "errorDeleteUndoFailure": "Could not undo deletion.",
+  "errorReturnUndoFailure": "Could not undo returning.",
+  "errorEmptyItem": "Please select an item.",
   "errorEmptyName": "Please enter a name.",
+  "errorEmptyPerson": "Please select a person.",
   "errorPersonExists": "Person already exists.",
+  "filterByBorrowed": "Filter by type",
   "filterByCategory": "Filter by category",
+  "filterByPerson": "Filter by person",
+  "filterByStatus": "Filter by status",
   "helperTextRequired": "required",
   "itemTitleEdit": "Edit item",
   "itemTitleNew": "New item",
@@ -25,7 +34,31 @@
   "itemsEmptyListFiltered": "No items for these filters",
   "itemsTitle": "Items",
   "labelCategory": "Category",
+  "labelDate": "Lending date",
+  "labelItem": "Item",
   "labelName": "Name",
+  "labelPerson": "Person",
+  "labelReturnDate": "Return date",
+  "lendingBorrowed": "borrowed",
+  "lendingBorrowedFrom": "borrowed from",
+  "lendingLent": "lent",
+  "lendingLentTo": "lent to",
+  "lendingNotReturned": "not returned",
+  "lendingReturned": "returned",
+  "lendingReturnedTimeAgo": "returned {when}",
+  "@lendingReturnedTimeAgo": {
+    "placeholders": {
+      "when": { "type": "String" }
+    }
+  },
+  "lendingSwitchSubtitle": "Is the item borrowed?",
+  "lendingSwitchTitleBorrowed": "Item borrowed",
+  "lendingSwitchTitleLent": "Item lent",
+  "lendingTitleEdit": "Edit lending",
+  "lendingTitleNew": "New lending",
+  "lendingsEmptyList": "No lendings",
+  "lendingsEmptyListFiltered": "No lendings for these filters",
+  "lendingsTitle": "Lendings",
   "messageCategoryCreateFailure": "Could not create category.",
   "messageCategoryCreateSuccess": "Category successfully created.",
   "messageCategoryDeleteFailure": "Could not delete category.",
@@ -40,6 +73,14 @@
   "messageItemDeleteSuccess": "Item successfully deleted.",
   "messageItemUpdateFailure": "Could not update item.",
   "messageItemUpdateSuccess": "Item successfully updated.",
+  "messageLendingCreateFailure": "Could not create lending.",
+  "messageLendingCreateSuccess": "Lending successfully created.",
+  "messageLendingDeleteFailure": "Could not delete lending.",
+  "messageLendingDeleteSuccess": "Lending successfully deleted.",
+  "messageLendingReturnFailure": "Could not return lending.",
+  "messageLendingReturnSuccess": "Lending successfully returned.",
+  "messageLendingUpdateFailure": "Could not update lending.",
+  "messageLendingUpdateSuccess": "Lending successfully updated.",
   "messagePersonCreateFailure": "Could not create person.",
   "messagePersonCreateSuccess": "Person successfully created.",
   "messagePersonDeleteFailure": "Could not delete person.",
@@ -51,6 +92,7 @@
   "peopleTitle": "People",
   "personTitleEdit": "Edit person",
   "personTitleNew": "New person",
+  "returned": "returned",
   "searchCategory": "Search category",
   "searchItem": "Search item",
   "searchPerson": "Search person",
@@ -59,5 +101,11 @@
   "themeDark": "Dark theme",
   "themeLight": "Light theme",
   "themeSystem": "System theme",
+  "timeAgo": "{difference,plural, =0{today} =1{yesterday} other{{difference} days ago}}",
+  "@timeAgo": {
+    "placeholders": {
+      "difference": { "type": "int" }
+    }
+  },
   "undo": "Undo"
 }

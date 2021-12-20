@@ -8,6 +8,8 @@ import 'categories/create_edit_category_page.dart';
 import 'database/database.dart';
 import 'items/create_edit_item_page.dart';
 import 'items/items_filter_cubit.dart';
+import 'lendings/create_edit_lending_page.dart';
+import 'lendings/lendings_filter_cubit/lendings_filter_cubit.dart';
 import 'navigation_backdrop.dart';
 import 'people/create_edit_person_page.dart';
 import 'settings/settings_controller.dart';
@@ -47,6 +49,14 @@ class MyApp extends StatelessWidget {
                   .read<MyDatabase>()
                   .itemsDao
                   .watchItemsWithCategory(nameFilter: query),
+            ),
+          ),
+          BlocProvider(
+            create: (context) => EntitySearchCubit<LendingWithData>(
+              (query) => context
+                  .read<MyDatabase>()
+                  .lendingsDao
+                  .watchLendingsWithData(itemFilter: query),
             ),
           ),
           BlocProvider(
@@ -150,6 +160,14 @@ class MyApp extends StatelessWidget {
                         return CreateEditItemPage(itemId: itemId);
                       },
                     );
+                  case CreateEditLendingPage.routeName:
+                    return MaterialPageRoute<void>(
+                      settings: routeSettings,
+                      builder: (BuildContext context) {
+                        final lendingId = routeSettings.arguments as int?;
+                        return CreateEditLendingPage(lendingId: lendingId);
+                      },
+                    );
                   case CreateEditPersonPage.routeName:
                     return MaterialPageRoute<void>(
                       settings: routeSettings,
@@ -162,8 +180,15 @@ class MyApp extends StatelessWidget {
                     return MaterialPageRoute<void>(
                       settings: routeSettings,
                       builder: (context) {
-                        return BlocProvider(
-                          create: (context) => ItemsFilterCubit(),
+                        return MultiBlocProvider(
+                          providers: [
+                            BlocProvider(
+                              create: (context) => LendingsFilterCubit(),
+                            ),
+                            BlocProvider(
+                              create: (context) => ItemsFilterCubit(),
+                            ),
+                          ],
                           child: const NavigationBackdrop(),
                         );
                       },

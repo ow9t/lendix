@@ -1,4 +1,5 @@
 {
+  "all": "alle",
   "appTitle": "Lendix",
   "@appTitle": {
     "description": "Der Titel der Applikation"
@@ -14,10 +15,18 @@
   "delete": "löschen",
   "errorCategoryExists": "Kategorie existiert bereits.",
   "errorItemWithCategoryExists": "Gegenstand mit dieser Kategorie existiert bereits.",
+  "errorLendingWithDataExistsLong": "Ausleihe mit dieser Kombination aus Gegenstand (mit Kategorie), Person und Datum existiert bereits.",
+  "errorLendingWithDataExistsShort": "Kombination aus Gegenstand, Person und Datum existiert bereits.",
   "errorDeleteUndoFailure": "Löschen konnte nicht rückgängig gemacht werden.",
+  "errorReturnUndoFailure": "Rückgabe konnte nicht rückgängig gemacht werden.",
+  "errorEmptyItem": "Bitte wähle einen Gegenstand aus.",
   "errorEmptyName": "Bitte gib einen Namen ein.",
+  "errorEmptyPerson": "Bitte wähle eine Person aus.",
   "errorPersonExists": "Person existiert bereits.",
+  "filterByBorrowed": "Nach Typ filtern",
   "filterByCategory": "Nach Kategorie filtern",
+  "filterByPerson": "Nach Person filtern",
+  "filterByStatus": "Nach Zustand filtern",
   "helperTextRequired": "erforderlich",
   "itemTitleEdit": "Gegenstand bearbeiten",
   "itemTitleNew": "Neuer Gegenstand",
@@ -25,7 +34,31 @@
   "itemsEmptyListFiltered": "Keine Gegenstände für diese Filter",
   "itemsTitle": "Gegenstände",
   "labelCategory": "Kategorie",
+  "labelDate": "Ausleihdatum",
+  "labelItem": "Gegenstand",
   "labelName": "Name",
+  "labelPerson": "Person",
+  "labelReturnDate": "Rückgabedatum",
+  "lendingBorrowed": "geliehen",
+  "lendingBorrowedFrom": "geliehen von",
+  "lendingLent": "verliehen",
+  "lendingLentTo": "verliehen an",
+  "lendingNotReturned": "nicht zurückgegeben",
+  "lendingReturned": "zurückgegeben",
+  "lendingReturnedTimeAgo": "{when} zurückgegeben",
+  "@lendingReturnedTimeAgo": {
+    "placeholders": {
+      "when": { "type": "String" }
+    }
+  },
+  "lendingSwitchSubtitle": "Ist der Gegenstand geliehen?",
+  "lendingSwitchTitleBorrowed": "Gegenstand geliehen",
+  "lendingSwitchTitleLent": "Gegenstand verliehen",
+  "lendingTitleEdit": "Ausleihe bearbeiten",
+  "lendingTitleNew": "Neue Ausleihe",
+  "lendingsEmptyList": "Keine Ausleihen",
+  "lendingsEmptyListFiltered": "Keine Ausleihen für diese Filter",
+  "lendingsTitle": "Ausleihen",
   "messageCategoryCreateFailure": "Kategorie konnte nicht angelegt werden.",
   "messageCategoryCreateSuccess": "Kategorie erfolgreich angelegt.",
   "messageCategoryDeleteFailure": "Kategorie konnte nicht gelöscht werden.",
@@ -40,6 +73,14 @@
   "messageItemDeleteSuccess": "Gegenstand erfolgreich angelegt.",
   "messageItemUpdateFailure": "Gegenstand konnte nicht geändert werden.",
   "messageItemUpdateSuccess": "Gegenstand erfolgreich geändert.",
+  "messageLendingCreateFailure": "Ausleihe konnte nicht angelegt werden.",
+  "messageLendingCreateSuccess": "Ausleihe erfolgreich angelegt.",
+  "messageLendingDeleteFailure": "Ausleihe konnte nicht gelöscht werden.",
+  "messageLendingDeleteSuccess": "Ausleihe erfolgreich gelöscht.",
+  "messageLendingReturnFailure": "Ausleihe konnte nicht zurückgegeben werden.",
+  "messageLendingReturnSuccess": "Ausleihe erfolgreich zurückgegeben.",
+  "messageLendingUpdateFailure": "Ausleihe konnte nicht geändert werden.",
+  "messageLendingUpdateSuccess": "Ausleihe erfolgreich geändert.",
   "messagePersonCreateFailure": "Person konnte nicht angelegt werden.",
   "messagePersonCreateSuccess": "Person erfolgreich angelegt.",
   "messagePersonDeleteFailure": "Person konnte nicht gelöscht werden.",
@@ -51,6 +92,7 @@
   "peopleTitle": "Personen",
   "personTitleEdit": "Person bearbeiten",
   "personTitleNew": "Neue Person",
+  "returned": "zurückgegeben",
   "searchCategory": "Suche Kategorie",
   "searchItem": "Suche Gegenstand",
   "searchPerson": "Suche Person",
@@ -59,5 +101,11 @@
   "themeDark": "Dunkles Thema",
   "themeLight": "Helles Thema",
   "themeSystem": "Systemthema",
+  "timeAgo": "{difference,plural, =0{heute} =1{gestern} other{vor {difference} Tagen}}",
+  "@timeAgo": {
+    "placeholders": {
+      "difference": { "type": "int" }
+    }
+  },
   "undo": "Rückgängig"
 }
