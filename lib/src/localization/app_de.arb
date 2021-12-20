@@ -3,9 +3,28 @@
   "@appTitle": {
     "description": "Der Titel der Applikation"
   },
+  "categoriesEmptyList": "Keine Kategorien",
+  "categoriesTitle": "Kategorien",
+  "categoryTitleEdit": "Kategorie bearbeiten",
+  "categoryTitleNew": "Neue Kategorie",
+  "delete": "löschen",
+  "errorCategoryExists": "Kategorie existiert bereits.",
+  "errorDeleteUndoFailure": "Löschen konnte nicht rückgängig gemacht werden.",
+  "errorEmptyName": "Bitte gib einen Namen ein.",
+  "helperTextRequired": "erforderlich",
+  "labelName": "Name",
+  "messageCategoryCreateFailure": "Kategorie konnte nicht angelegt werden.",
+  "messageCategoryCreateSuccess": "Kategorie erfolgreich angelegt.",
+  "messageCategoryDeleteFailure": "Kategorie konnte nicht gelöscht werden.",
+  "messageCategoryDeleteProhibited": "Kategorie konnte nicht gelöscht werden.\nEs existiert noch mindestens ein Gegenstand mit dieser Kategorie.",
+  "messageCategoryDeleteSuccess": "Kategorie erfolgreich gelöscht.",
+  "messageCategoryUpdateFailure": "Kategorie konnte nicht geändert werden.",
+  "messageCategoryUpdateSuccess": "Kategorie erfolgreich geändert.",
+  "searchCategory": "Suche Kategorie",
   "settingsAppearanceLabel": "Aussehen",
   "settingsTitle": "Einstellungen",
   "themeDark": "Dunkles Thema",
   "themeLight": "Helles Thema",
-  "themeSystem": "Systemthema"
+  "themeSystem": "Systemthema",
+  "undo": "Rückgängig"
 }

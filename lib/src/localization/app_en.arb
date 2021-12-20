@@ -3,9 +3,28 @@
   "@appTitle": {
     "description": "The title of the application"
   },
+  "categoriesEmptyList": "No categories",
+  "categoriesTitle": "Categories",
+  "categoryTitleEdit": "Edit category",
+  "categoryTitleNew": "New category",
+  "delete": "delete",
+  "errorCategoryExists": "Category already exists.",
+  "errorDeleteUndoFailure": "Could not undo deletion.",
+  "errorEmptyName": "Please enter a name.",
+  "helperTextRequired": "required",
+  "labelName": "Name",
+  "messageCategoryCreateFailure": "Could not create category.",
+  "messageCategoryCreateSuccess": "Category successfully created.",
+  "messageCategoryDeleteFailure": "Could not delete category.",
+  "messageCategoryDeleteProhibited": "Could not delete category.\nAt least one item with this category still exist.",
+  "messageCategoryDeleteSuccess": "Category successfully deleted.",
+  "messageCategoryUpdateFailure": "Could not update category.",
+  "messageCategoryUpdateSuccess": "Category successfully updated.",
+  "searchCategory": "Search category",
   "settingsAppearanceLabel": "Appearance",
   "settingsTitle": "Settings",
   "themeDark": "Dark theme",
   "themeLight": "Light theme",
-  "themeSystem": "System theme"
+  "themeSystem": "System theme",
+  "undo": "Undo"
 }
