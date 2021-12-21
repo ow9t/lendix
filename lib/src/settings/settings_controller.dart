@@ -13,6 +13,10 @@ class SettingsController with ChangeNotifier {
   // Make SettingsService a private variable so it is not used directly.
   final SettingsService _settingsService;
 
+  late bool _hasLaunchedBefore;
+
+  bool get hasLaunchedBefore => _hasLaunchedBefore;
+
   // Make ThemeMode a private variable so it is not updated directly without
   // also persisting the changes with the SettingsService.
   late ThemeMode _themeMode;
@@ -24,10 +28,17 @@ class SettingsController with ChangeNotifier {
   /// local database or the internet. The controller only knows it can load the
   /// settings from the service.
   Future<void> loadSettings() async {
+    _hasLaunchedBefore = await _settingsService.hasLaunchedBefore();
     _themeMode = await _settingsService.themeMode();
 
     // Important! Inform listeners a change has occurred.
     notifyListeners();
+  }
+
+  Future<void> setHasLaunchedBefore([bool value = true]) async {
+    _hasLaunchedBefore = value;
+    notifyListeners();
+    await _settingsService.setHasLaunchedBefore(value);
   }
 
   /// Update and persist the ThemeMode based on the user's selection.

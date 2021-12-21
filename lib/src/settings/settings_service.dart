@@ -3,7 +3,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 /// A service that stores and retrieves user settings.
 class SettingsService {
+  static const hasLaunchedBeforeKey = 'hasLaunchedBefore';
   static const themeModeKey = 'themeMode';
+
+  Future<bool> hasLaunchedBefore() async {
+    final prefs = await SharedPreferences.getInstance();
+    final maybeHasLaunchedBefore = prefs.getBool(hasLaunchedBeforeKey);
+    return maybeHasLaunchedBefore ?? false;
+  }
+
+  Future<void> setHasLaunchedBefore(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(hasLaunchedBeforeKey, value);
+  }
 
   /// Loads the User's preferred ThemeMode from local.
   Future<ThemeMode> themeMode() async {

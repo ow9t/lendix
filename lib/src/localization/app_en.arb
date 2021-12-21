@@ -1,4 +1,9 @@
 {
+  "aboutLegalese": "Copyright © 2021 Ole Walkenhorst",
+  "aboutLicensingHeading": "Licensing",
+  "aboutLicensingSection": "This app is free and open-source software provided under the MIT license.",
+  "aboutPrivacyHeading": "Privacy",
+  "aboutPrivacySection": "This app does not collect any data about you. All data you provide to the app is stored in a local sqlite database and never leaves your device. If you clear the app's storage or uninstall it, all data saved by the app will be deleted.",
   "all": "all",
   "appTitle": "Lendix",
   "@appTitle": {

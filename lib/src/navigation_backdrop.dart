@@ -2,6 +2,7 @@ import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:lendix/constants.dart';
 
 import 'categories/categories_list_page.dart';
 import 'categories/create_edit_category_page.dart';
@@ -17,14 +18,21 @@ import 'lendings/lendings_filter_cubit/lendings_filter_cubit.dart';
 import 'lendings/lendings_list_page.dart';
 import 'people/create_edit_person_page.dart';
 import 'people/people_list_page.dart';
+import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
+import 'widgets/about_dialog_content.dart';
 import 'widgets/entity_search/entity_search_delegate.dart';
 import 'widgets/notification_icon.dart';
 
 enum BackdropRoute { lendings, categories, items, people, settings }
 
 class NavigationBackdrop extends StatefulWidget {
-  const NavigationBackdrop({Key? key}) : super(key: key);
+  const NavigationBackdrop({
+    Key? key,
+    required this.settingsController,
+  }) : super(key: key);
+
+  final SettingsController settingsController;
 
   static const routeName = '/';
 
@@ -68,6 +76,24 @@ class _NavigationBackdropState extends State<NavigationBackdrop> {
       case BackdropRoute.settings:
         return localizations.settingsTitle;
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      if (widget.settingsController.hasLaunchedBefore) {
+        return;
+      }
+      final localizations = AppLocalizations.of(context)!;
+      showAboutDialog(
+        context: context,
+        applicationVersion: applicationVersion,
+        applicationLegalese: localizations.aboutLegalese,
+        children: [const AboutDialogContent()],
+      );
+      widget.settingsController.setHasLaunchedBefore();
+    });
   }
 
   List<Widget>? buildAppBarActions() {

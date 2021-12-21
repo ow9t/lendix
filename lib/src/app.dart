@@ -189,7 +189,9 @@ class MyApp extends StatelessWidget {
                               create: (context) => ItemsFilterCubit(),
                             ),
                           ],
-                          child: const NavigationBackdrop(),
+                          child: NavigationBackdrop(
+                            settingsController: settingsController,
+                          ),
                         );
                       },
                     );
