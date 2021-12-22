@@ -65,6 +65,9 @@ class SettingsView extends StatelessWidget {
           ),
           AboutListTile(
             icon: const Icon(Icons.info_outline),
+            applicationIcon: const Image(
+              image: AssetImage('assets/images/lendix_logo.png'),
+            ),
             applicationLegalese: localizations.aboutLegalese,
             applicationVersion: applicationVersion,
             aboutBoxChildren: const [AboutDialogContent()],

@@ -88,6 +88,9 @@ class _NavigationBackdropState extends State<NavigationBackdrop> {
       final localizations = AppLocalizations.of(context)!;
       showAboutDialog(
         context: context,
+        applicationIcon: const Image(
+          image: AssetImage('assets/images/lendix_logo.png'),
+        ),
         applicationVersion: applicationVersion,
         applicationLegalese: localizations.aboutLegalese,
         children: [const AboutDialogContent()],
